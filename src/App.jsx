@@ -29,41 +29,18 @@ function App() {
   };
 
   const scanFilesDirectory = async () => {
-    const fileList = [];
-    const filesContext = import.meta.glob('/public/files/**/*', { eager: false });
-    
-    let id = 1;
-    for (const path in filesContext) {
-      const fileName = path.replace('/public/files/', '');
-      if (fileName && !fileName.includes('/')) {
-        try {
-          const response = await fetch(`/files/${fileName}`, { method: 'HEAD' });
-          const size = parseInt(response.headers.get('content-length') || '0');
-          const lastModified = response.headers.get('last-modified');
-          
-          fileList.push({
-            id: id++,
-            name: fileName,
-            type: 'file',
-            size: size,
-            modifiedDate: lastModified || new Date().toISOString()
-          });
-        } catch (error) {
-          console.error(`Error loading file ${fileName}:`, error);
-        }
+    try {
+      const basePath = import.meta.env.BASE_URL || '/';
+      const response = await fetch(`${basePath}api/files.json`);
+      if (response.ok) {
+        const fileList = await response.json();
+        return fileList;
       }
+    } catch (error) {
+      console.error('Failed to load files:', error);
     }
     
-    if (fileList.length === 0) {
-      const defaultFiles = [
-        { id: 1, name: '示例文档.txt', type: 'file', size: 1024, modifiedDate: new Date().toISOString() },
-        { id: 2, name: '数据报表.csv', type: 'file', size: 2048, modifiedDate: new Date().toISOString() },
-        { id: 3, name: '项目说明.md', type: 'file', size: 512, modifiedDate: new Date().toISOString() }
-      ];
-      return defaultFiles;
-    }
-    
-    return fileList;
+    return [];
   };
 
   const showToast = (message, type = 'success') => {
@@ -104,8 +81,9 @@ function App() {
 
   const handleDownloadFile = (file) => {
     try {
+      const basePath = import.meta.env.BASE_URL || '/';
       const link = document.createElement('a');
-      link.href = `/files/${file.name}`;
+      link.href = `${basePath}files/${file.name}`;
       link.download = file.name;
       document.body.appendChild(link);
       link.click();
@@ -130,10 +108,11 @@ function App() {
     try {
       showToast(`正在下载 ${selectedFileList.length} 个文件...`, 'info');
       
+      const basePath = import.meta.env.BASE_URL || '/';
       for (const file of selectedFileList) {
         await new Promise(resolve => setTimeout(resolve, 300));
         const link = document.createElement('a');
-        link.href = `/files/${file.name}`;
+        link.href = `${basePath}files/${file.name}`;
         link.download = file.name;
         document.body.appendChild(link);
         link.click();
@@ -151,8 +130,10 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <svg t="1765169716364" viewBox="0 0 1146 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8844" width="30" height="30"><path d="M733.696 424.96c-7.68 0-14.848 0.512-22.528 1.024-48.64-104.96-152.064-177.664-271.872-177.664-156.672 0-285.184 124.416-300.032 283.136C60.416 550.912 2.048 624.128 2.048 712.192c0 102.4 79.872 185.344 178.176 185.344h536.064v-1.536c5.632 0.512 11.776 0.512 17.408 0.512 125.44 0 226.304-105.472 226.304-236.032 0-129.536-101.376-235.52-226.304-235.52z" fill="#5FA1FC" p-id="8845"></path><path d="M961.536 279.04c-6.144 0-12.288 0.512-18.432 1.024-39.936-85.504-123.392-144.384-220.672-144.384-69.12 0-131.072 29.696-175.616 77.824 81.408 27.136 150.016 84.48 194.048 159.232 148.48 3.584 267.776 129.024 270.336 283.648 77.824-22.528 135.168-96.768 135.168-184.832-0.512-106.496-83.456-192.512-184.832-192.512z" fill="#88B8FD" p-id="8846"></path></svg>
-        <h1>QCloud</h1>
+        <div className='logo-container'>
+          <svg t="1765169716364" viewBox="0 0 1146 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8844" width="30" height="30"><path d="M733.696 424.96c-7.68 0-14.848 0.512-22.528 1.024-48.64-104.96-152.064-177.664-271.872-177.664-156.672 0-285.184 124.416-300.032 283.136C60.416 550.912 2.048 624.128 2.048 712.192c0 102.4 79.872 185.344 178.176 185.344h536.064v-1.536c5.632 0.512 11.776 0.512 17.408 0.512 125.44 0 226.304-105.472 226.304-236.032 0-129.536-101.376-235.52-226.304-235.52z" fill="#5FA1FC" p-id="8845"></path><path d="M961.536 279.04c-6.144 0-12.288 0.512-18.432 1.024-39.936-85.504-123.392-144.384-220.672-144.384-69.12 0-131.072 29.696-175.616 77.824 81.408 27.136 150.016 84.48 194.048 159.232 148.48 3.584 267.776 129.024 270.336 283.648 77.824-22.528 135.168-96.768 135.168-184.832-0.512-106.496-83.456-192.512-184.832-192.512z" fill="#88B8FD" p-id="8846"></path></svg>
+          <h1>QCloud</h1>
+        </div>
       </header>
       
       <main className="app-main">

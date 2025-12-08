@@ -21,19 +21,20 @@ export default function FileViewer({ file, onDownload, onClose }) {
     setError(false);
     
     try {
+      const basePath = import.meta.env.BASE_URL || '/';
       const ext = file.name.split('.').pop().toLowerCase();
       const textExtensions = ['txt', 'md', 'html', 'css', 'js', 'json', 'xml', 'csv', 'log', 'jsx', 'ts', 'tsx', 'doc', 'docx'];
       const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp'];
       
       if (ext === 'pdf') {
-        setContent(`/files/${file.name}`);
+        setContent(`${basePath}files/${file.name}`);
       } else if (textExtensions.includes(ext)) {
-        const response = await fetch(`/files/${file.name}`);
+        const response = await fetch(`${basePath}files/${file.name}`);
         const blob = await response.blob();
         const text = await blob.text();
         setContent(text);
       } else if (imageExtensions.includes(ext)) {
-        setContent(`/files/${file.name}`);
+        setContent(`${basePath}files/${file.name}`);
       } else {
         setContent('preview-not-supported');
       }
