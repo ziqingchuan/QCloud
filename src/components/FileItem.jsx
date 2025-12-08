@@ -55,7 +55,7 @@ export default function FileItem({
               onDownload(file);
             }}
           >
-            <DownloadIcon size={16} />
+            <DownloadIcon size={12} />
           </button>
         )}
       </div>

@@ -139,11 +139,11 @@
 
 .file-download-btn {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 10px;
+  right: 10px;
   background-color: #fff;
   border: 1px solid #DADCE0;
-  padding: 6px;
+  padding: 5px;
   border-radius: 4px;
   cursor: pointer;
   display: flex;
