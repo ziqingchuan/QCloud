@@ -18,6 +18,7 @@
 - 专业的B端后台风格界面
 - 优雅的顶部Toast提示
 - 支持多种文件类型识别
+- 智能版本控制，确保文件列表实时更新
 
 ## 技术栈
 
@@ -81,18 +82,12 @@ npm run build
 │       └── files.json      # 文件元数据
 ├── src/
 │   ├── components/         # 组件目录
-│   │   ├── FileList.jsx   # 文件列表组件
-│   │   ├── FileItem.jsx   # 文件项组件
-│   │   ├── Toolbar.jsx    # 工具栏组件
-│   │   ├── FileViewer.jsx # 文件预览组件（弹出层）
-│   │   ├── Toast.jsx      # Toast提示组件
-│   │   └── icons/         # SVG图标组件
-│   ├── utils/             # 工具函数
-│   │   └── fileUtils.js   # 文件处理工具
-│   ├── styles/            # 样式文件
-│   └── App.jsx            # 主应用组件
-├── generate-file-list.js  # 文件列表生成脚本
-└── vite.config.js         # Vite配置
+│   ├── utils/              # 工具函数
+│   ├── styles/             # 样式文件
+│   ├── file-manifest.json  # 文件版本清单（自动生成）
+│   └── App.jsx             # 主应用组件
+├── generate-file-list.js   # 文件列表生成脚本
+└── vite.config.js          # Vite配置
 ```
 
 ## 使用说明
@@ -105,6 +100,74 @@ npm run build
 6. **双击文件**或点击预览图标打开预览弹窗查看内容
 7. 文本文件预览时，点击右上角复制按钮可复制内容到剪贴板
 8. 选中多个文件后，点击"批量下载"按钮下载所有选中文件
+
+## 缓存控制与版本管理
+
+### GitHub Pages缓存问题
+
+GitHub Pages会缓存静态文件，导致更新文件后用户看不到最新内容。本系统采用**智能版本控制**解决这个问题：
+
+### 工作原理
+
+1. **生成文件列表时**：
+   - 扫描 `public/files` 目录
+   - 生成 `files.json` 文件
+   - 计算文件列表的MD5哈希值作为版本号
+   - 将版本号保存到 `src/file-manifest.json`
+
+2. **应用加载时**：
+   - 读取 `file-manifest.json` 获取版本号
+   - 请求 `files.json?v=版本号`
+   - 版本号变化时，浏览器会获取新文件
+   - 版本号不变时，使用缓存
+
+### 版本号生成
+
+```javascript
+// 文件列表内容 -> MD5哈希 -> 取前8位
+// 例如：08317614
+```
+
+只要文件列表内容发生变化（添加、删除、修改文件），版本号就会改变，浏览器就会获取最新数据。
+
+### 更新流程
+
+1. 在 `public/files` 添加或删除文件
+2. 运行 `npm run build`（自动生成新版本号）
+3. 部署到GitHub Pages
+4. 用户刷新页面，自动获取最新文件列表（无需清除缓存）
+
+## 部署到GitHub Pages
+
+### 方法一：使用gh-pages包（推荐）
+
+```bash
+npm run deploy
+```
+
+这会自动构建并部署到GitHub Pages。
+
+### 方法二：手动部署
+
+1. 构建项目：
+```bash
+npm run build
+```
+
+2. 将 `dist` 目录推送到 `gh-pages` 分支
+
+3. 在GitHub仓库设置中启用GitHub Pages，选择 `gh-pages` 分支
+
+### 配置base路径
+
+如果你的仓库名不是 `username.github.io`，需要在 `vite.config.js` 中设置base：
+
+```javascript
+export default defineConfig({
+  plugins: [react()],
+  base: '/your-repo-name/'  // 替换为你的仓库名
+})
+```
 
 ## 特色功能
 
@@ -135,24 +198,6 @@ npm run build
 - 列表视图：显示详细信息（名称、大小、修改日期、操作）
 - 网格视图：卡片式展示，适合浏览图片
 
-## 工作原理
-
-系统使用 `generate-file-list.js` 脚本在构建前扫描 `public/files` 目录，生成包含文件元数据的 `files.json` 文件。这样可以避免Vite在打包时尝试解析非JavaScript文件导致的错误。
-
-**开发模式：**
-1. 运行 `npm run dev`
-2. 自动执行 `generate-file-list.js` 扫描文件
-3. 生成 `public/api/files.json`
-4. 启动Vite开发服务器
-5. 应用从 `files.json` 读取文件列表
-
-**生产模式：**
-1. 运行 `npm run build`
-2. 自动执行 `generate-file-list.js` 扫描文件
-3. 生成 `public/api/files.json`
-4. Vite打包应用
-5. `files.json` 和文件一起打包到 `dist` 目录
-
 ## 移动端适配
 
 - 小屏幕下自动调整布局
@@ -160,26 +205,62 @@ npm run build
 - 按钮和文字大小自动调整
 - 隐藏部分不必要的列信息
 
+## 常见问题
+
+### Q: 更新文件后看不到新内容？
+A: 
+1. 确保重新运行了 `npm run build` 并重新部署
+2. 系统会自动生成新版本号，刷新页面即可看到更新
+3. 如果还是看不到，尝试强制刷新（Ctrl+F5 或 Cmd+Shift+R）
+
+### Q: 为什么有些文件预览不了？
+A: 系统只支持文本、图片和PDF预览。其他格式（如Word、Excel原格式）需要下载后查看。
+
+### Q: 如何自定义base路径？
+A: 修改 `vite.config.js` 中的 `base` 配置，系统会自动适配所有路径。
+
+### Q: 支持文件夹吗？
+A: 当前版本只支持 `public/files` 根目录下的文件，不支持子文件夹。
+
+### Q: 版本号是如何生成的？
+A: 系统会计算文件列表内容的MD5哈希值，取前8位作为版本号。只要文件列表变化，版本号就会改变。
+
+### Q: 为什么要用版本号而不是时间戳？
+A: 
+- 版本号基于内容，相同内容产生相同版本号，可以利用浏览器缓存
+- 时间戳每次都不同，无法利用缓存
+- 版本号更短，更易读
+
+## 技术细节
+
+### 文件列表生成
+
+`generate-file-list.js` 脚本会：
+1. 扫描 `public/files` 目录
+2. 收集文件信息（名称、大小、修改时间）
+3. 生成 `public/api/files.json`
+4. 计算内容哈希生成版本号
+5. 保存版本信息到 `src/file-manifest.json`
+
+### 版本控制流程
+
+```
+文件变化 -> 重新构建 -> 生成新版本号 -> 
+打包到dist -> 部署 -> 用户访问 -> 
+检测到新版本 -> 获取最新数据
+```
+
 ## 注意事项
 
 - 纯前端实现，无需后端服务器
 - 文件直接从 `public/files` 目录读取
-- 每次添加或删除文件后，需要重新运行 `npm run dev` 或 `npm run build`
+- 每次添加或删除文件后，需要重新运行 `npm run build`
 - 大文件预览可能需要较长加载时间
 - 建议文件大小不超过10MB以获得最佳体验
 - 批量下载会依次触发多个下载，浏览器可能会提示是否允许多个下载
 - 文件名支持中文和特殊字符
+- 版本控制确保文件列表实时更新，无需手动清除浏览器缓存
 
-## 部署
+## License
 
-构建后的文件可以部署到任何静态文件服务器：
-
-```bash
-npm run build
-```
-
-将 `dist` 目录部署到：
-- GitHub Pages
-- Vercel
-- Netlify
-- 或任何支持静态文件的服务器
+MIT

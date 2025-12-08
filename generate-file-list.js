@@ -1,12 +1,15 @@
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const filesDir = path.join(__dirname, 'public', 'files');
-const outputPath = path.join(__dirname, 'public', 'api', 'files.json');
+const apiDir = path.join(__dirname, 'public', 'api');
+const outputPath = path.join(apiDir, 'files.json');
+const manifestPath = path.join(__dirname, 'src', 'file-manifest.json');
 
 function generateFileList() {
   if (!fs.existsSync(filesDir)) {
@@ -33,13 +36,26 @@ function generateFileList() {
       };
     });
 
-  const apiDir = path.join(__dirname, 'public', 'api');
   if (!fs.existsSync(apiDir)) {
     fs.mkdirSync(apiDir, { recursive: true });
   }
 
-  fs.writeFileSync(outputPath, JSON.stringify(fileList, null, 2));
-  console.log(`Generated file list with ${fileList.length} files`);
+  // 生成文件列表的哈希值
+  const content = JSON.stringify(fileList, null, 2);
+  const hash = crypto.createHash('md5').update(content).digest('hex').substring(0, 8);
+  
+  // 写入files.json
+  fs.writeFileSync(outputPath, content);
+  
+  // 写入manifest文件，包含版本信息
+  const manifest = {
+    version: hash,
+    timestamp: new Date().toISOString(),
+    fileCount: fileList.length
+  };
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+  
+  console.log(`Generated file list with ${fileList.length} files (version: ${hash})`);
 }
 
 generateFileList();

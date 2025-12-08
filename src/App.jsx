@@ -31,7 +31,23 @@ function App() {
   const scanFilesDirectory = async () => {
     try {
       const basePath = import.meta.env.BASE_URL || '/';
-      const response = await fetch(`${basePath}api/files.json`);
+      
+      // 先获取manifest获取版本号
+      let version = new Date().getTime();
+      try {
+        const manifestModule = await import('./file-manifest.json');
+        version = manifestModule.default.version || version;
+      } catch (e) {
+        console.log('No manifest found, using timestamp');
+      }
+      
+      const response = await fetch(`${basePath}api/files.json?v=${version}`, {
+        cache: 'no-cache',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
       if (response.ok) {
         const fileList = await response.json();
         return fileList;
