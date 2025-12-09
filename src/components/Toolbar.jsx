@@ -3,6 +3,7 @@ import SearchIcon from './icons/SearchIcon';
 import DownloadIcon from './icons/DownloadIcon';
 import GridIcon from './icons/GridIcon';
 import ListIcon from './icons/ListIcon';
+import SplitIcon from './icons/SplitIcon';
 import '../styles/Toolbar.css';
 
 export default function Toolbar({ 
@@ -56,6 +57,13 @@ export default function Toolbar({
             title="网格视图"
           >
             <GridIcon size={20} color={viewMode === 'grid' ? '#1A73E8' : '#5F6368'} />
+          </button>
+          <button 
+            className={viewMode === 'split' ? 'active' : ''}
+            onClick={() => onViewModeChange('split')}
+            title="分栏视图"
+          >
+            <SplitIcon size={20} color={viewMode === 'split' ? '#1A73E8' : '#5F6368'} />
           </button>
         </div>
       </div>

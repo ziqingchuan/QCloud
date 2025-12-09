@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Toolbar from './components/Toolbar';
 import FileList from './components/FileList';
+import SplitView from './components/SplitView';
 import FileViewer from './components/FileViewer';
 import Toast from './components/Toast';
 import './styles/App.css';
@@ -161,14 +162,21 @@ function App() {
           onViewModeChange={setViewMode}
         />
         
-        <FileList
-          files={filteredFiles}
-          selectedFiles={selectedFiles}
-          onSelectFile={handleSelectFile}
-          onDownloadFile={handleDownloadFile}
-          onPreviewFile={handlePreviewFile}
-          viewMode={viewMode}
-        />
+        {viewMode === 'split' ? (
+          <SplitView
+            files={filteredFiles}
+            onDownloadFile={handleDownloadFile}
+          />
+        ) : (
+          <FileList
+            files={filteredFiles}
+            selectedFiles={selectedFiles}
+            onSelectFile={handleSelectFile}
+            onDownloadFile={handleDownloadFile}
+            onPreviewFile={handlePreviewFile}
+            viewMode={viewMode}
+          />
+        )}
       </main>
 
       {previewFile && (
