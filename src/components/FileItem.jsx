@@ -3,29 +3,46 @@ import FolderIcon from './icons/FolderIcon';
 import DownloadIcon from './icons/DownloadIcon';
 import PreviewIcon from './icons/PreviewIcon';
 import CheckIcon from './icons/CheckIcon';
+import ChevronRightIcon from './icons/ChevronRightIcon';
+import ChevronDownIcon from './icons/ChevronDownIcon';
 import { getFileType, formatFileSize, formatDate } from '../utils/fileUtils';
 import '../styles/FileItem.css';
 
 export default function FileItem({ 
   file, 
   isSelected, 
+  isExpanded,
   onSelect, 
   onDownload,
   onPreview,
+  onToggleFolder,
   viewMode 
 }) {
   const fileType = getFileType(file.name);
+  const depth = file.parentPath ? file.parentPath.split('/').length : 0;
   
   const handleClick = (e) => {
     if (e.target.closest('.file-actions')) return;
-    onSelect(file.id);
+    if (e.target.closest('.folder-toggle')) return;
+    
+    if (file.type === 'folder') {
+      onToggleFolder(file.path);
+    } else {
+      onSelect(file.id);
+    }
   };
 
   const handleDoubleClick = (e) => {
     if (e.target.closest('.file-actions')) return;
+    if (file.type === 'folder') return;
     if (onPreview) {
       onPreview(file);
     }
+  };
+
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    onToggleFolder(file.path);
   };
 
   if (viewMode === 'grid') {
@@ -64,12 +81,27 @@ export default function FileItem({
 
   return (
     <div 
-      className={`file-item-list ${isSelected ? 'selected' : ''}`}
+      className={`file-item-list ${isSelected ? 'selected' : ''} ${file.type === 'folder' ? 'folder' : ''}`}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
+      style={{ paddingLeft: `${16 + depth * 24}px` }}
     >
+      <div className="file-expand">
+        {file.type === 'folder' && file.hasChildren ? (
+          <button className="folder-toggle" onClick={handleToggle}>
+            {isExpanded ? (
+              <ChevronDownIcon size={16} />
+            ) : (
+              <ChevronRightIcon size={16} />
+            )}
+          </button>
+        ) : (
+          <span className="folder-spacer"></span>
+        )}
+      </div>
+      
       <div className="file-checkbox">
-        {isSelected && <CheckIcon size={16} />}
+        {isSelected && file.type !== 'folder' && <CheckIcon size={16} />}
       </div>
       
       <div className="file-icon">

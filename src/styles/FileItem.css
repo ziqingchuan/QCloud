@@ -1,12 +1,44 @@
 .file-item-list {
   display: grid;
-  grid-template-columns: 40px 40px 1fr 120px 180px 100px;
-  gap: 16px;
+  grid-template-columns: 24px 40px 40px 1fr 120px 180px 100px;
+  gap: 8px;
   padding: 12px 16px;
   align-items: center;
   border-bottom: 1px solid #F1F3F4;
   cursor: pointer;
   transition: background-color 0.15s;
+}
+
+.file-item-list.folder {
+  font-weight: 500;
+}
+
+.file-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folder-toggle {
+  background: transparent;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.folder-toggle:hover {
+  background-color: #F1F3F4;
+}
+
+.folder-spacer {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
 }
 
 .file-item-list:hover {
@@ -164,15 +196,15 @@
 
 @media (max-width: 1024px) {
   .file-item-list {
-    grid-template-columns: 40px 40px 1fr 100px 140px 80px;
-    gap: 12px;
+    grid-template-columns: 24px 40px 40px 1fr 100px 140px 80px;
+    gap: 8px;
   }
 }
 
 @media (max-width: 768px) {
   .file-item-list {
-    grid-template-columns: 40px 40px 1fr 80px;
-    gap: 8px;
+    grid-template-columns: 24px 40px 40px 1fr 80px;
+    gap: 6px;
     padding: 10px 12px;
   }
   

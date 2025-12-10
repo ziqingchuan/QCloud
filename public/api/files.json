@@ -1,65 +1,103 @@
 [
   {
     "id": 1,
-    "name": "垃圾分类知识练习题.md",
-    "type": "file",
-    "size": 31133,
-    "modifiedDate": "2025-12-08T05:45:35.309Z"
+    "name": "提示词",
+    "path": "提示词",
+    "type": "folder",
+    "size": 0,
+    "modifiedDate": "2025-12-09T13:02:25.181Z",
+    "parentPath": "",
+    "hasChildren": true
   },
   {
     "id": 2,
-    "name": "工作流截图.png",
+    "name": "智能体提示词（工作流调用）.md",
+    "path": "提示词/智能体提示词（工作流调用）.md",
     "type": "file",
-    "size": 237567,
-    "modifiedDate": "2025-12-09T02:07:06.240Z"
+    "size": 5425,
+    "modifiedDate": "2025-12-08T06:41:24.208Z",
+    "parentPath": "提示词"
   },
   {
     "id": 3,
-    "name": "工作流搭建流程.pdf",
+    "name": "智能体提示词（简易）.md",
+    "path": "提示词/智能体提示词（简易）.md",
     "type": "file",
-    "size": 864380,
-    "modifiedDate": "2025-12-08T07:00:02.850Z"
+    "size": 2852,
+    "modifiedDate": "2025-12-08T05:28:34.484Z",
+    "parentPath": "提示词"
   },
   {
     "id": 4,
-    "name": "废弃纸箱.png",
+    "name": "智能体提示词（知识库调用）.md",
+    "path": "提示词/智能体提示词（知识库调用）.md",
     "type": "file",
-    "size": 717214,
-    "modifiedDate": "2025-12-08T05:17:42.029Z"
+    "size": 4242,
+    "modifiedDate": "2025-12-08T05:28:31.737Z",
+    "parentPath": "提示词"
   },
   {
     "id": 5,
-    "name": "智能体封面.png",
-    "type": "file",
-    "size": 1726565,
-    "modifiedDate": "2025-12-08T04:29:32.612Z"
+    "name": "图片资源",
+    "path": "图片资源",
+    "type": "folder",
+    "size": 0,
+    "modifiedDate": "2025-12-09T13:20:42.980Z",
+    "parentPath": "",
+    "hasChildren": true
   },
   {
     "id": 6,
-    "name": "智能体提示词（工作流调用）.md",
+    "name": "废弃纸箱.png",
+    "path": "图片资源/废弃纸箱.png",
     "type": "file",
-    "size": 5425,
-    "modifiedDate": "2025-12-08T06:41:24.208Z"
+    "size": 50920,
+    "modifiedDate": "2025-12-09T13:19:08.533Z",
+    "parentPath": "图片资源"
   },
   {
     "id": 7,
-    "name": "智能体提示词（知识库调用）.md",
+    "name": "工作流截图.png",
+    "path": "图片资源/工作流截图.png",
     "type": "file",
-    "size": 4242,
-    "modifiedDate": "2025-12-08T05:28:31.737Z"
+    "size": 46851,
+    "modifiedDate": "2025-12-09T13:19:31.950Z",
+    "parentPath": "图片资源"
   },
   {
     "id": 8,
-    "name": "智能体提示词（简易）.md",
+    "name": "智能体封面.png",
+    "path": "图片资源/智能体封面.png",
     "type": "file",
-    "size": 2852,
-    "modifiedDate": "2025-12-08T05:28:34.484Z"
+    "size": 85988,
+    "modifiedDate": "2025-12-09T13:19:46.930Z",
+    "parentPath": "图片资源"
   },
   {
     "id": 9,
     "name": "豆包提问模板.md",
+    "path": "豆包提问模板.md",
     "type": "file",
     "size": 387,
-    "modifiedDate": "2025-12-08T05:10:50.490Z"
+    "modifiedDate": "2025-12-08T05:10:50.490Z",
+    "parentPath": ""
+  },
+  {
+    "id": 10,
+    "name": "工作流搭建流程.pdf",
+    "path": "工作流搭建流程.pdf",
+    "type": "file",
+    "size": 864380,
+    "modifiedDate": "2025-12-08T07:00:02.850Z",
+    "parentPath": ""
+  },
+  {
+    "id": 11,
+    "name": "垃圾分类知识练习题.md",
+    "path": "垃圾分类知识练习题.md",
+    "type": "file",
+    "size": 31133,
+    "modifiedDate": "2025-12-08T05:45:35.309Z",
+    "parentPath": ""
   }
 ]

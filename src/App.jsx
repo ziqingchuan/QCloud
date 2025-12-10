@@ -10,6 +10,7 @@ function App() {
   const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [expandedFolders, setExpandedFolders] = useState([]);
   const [viewMode, setViewMode] = useState('list');
   const [previewFile, setPreviewFile] = useState(null);
   const [toast, setToast] = useState({ isVisible: false, message: '', type: 'success' });
@@ -68,9 +69,40 @@ function App() {
     setToast({ isVisible: false, message: '', type: 'success' });
   };
 
+  const getVisibleFiles = (allFiles, expanded) => {
+    const visible = [];
+    
+    allFiles.forEach(file => {
+      // 根目录文件或文件夹总是可见
+      if (!file.parentPath) {
+        visible.push(file);
+      } else {
+        // 检查所有祖先文件夹是否都展开
+        const pathParts = file.parentPath.split('/');
+        let allAncestorsExpanded = true;
+        
+        // 检查每一层父文件夹
+        for (let i = 1; i <= pathParts.length; i++) {
+          const ancestorPath = pathParts.slice(0, i).join('/');
+          if (!expanded.includes(ancestorPath)) {
+            allAncestorsExpanded = false;
+            break;
+          }
+        }
+        
+        if (allAncestorsExpanded) {
+          visible.push(file);
+        }
+      }
+    });
+    
+    return visible;
+  };
+
   const handleSearch = (searchText) => {
     if (!searchText.trim()) {
-      setFilteredFiles(files);
+      const visible = getVisibleFiles(files, expandedFolders);
+      setFilteredFiles(visible);
       return;
     }
     const filtered = files.filter(file => 
@@ -78,6 +110,25 @@ function App() {
     );
     setFilteredFiles(filtered);
   };
+
+  const handleToggleFolder = (folderPath) => {
+    setExpandedFolders(prev => {
+      if (prev.includes(folderPath)) {
+        // 折叠时，同时移除所有子文件夹的展开状态
+        return prev.filter(p => {
+          // 保留不是当前文件夹或其子文件夹的路径
+          return p !== folderPath && !p.startsWith(folderPath + '/');
+        });
+      } else {
+        return [...prev, folderPath];
+      }
+    });
+  };
+
+  useEffect(() => {
+    const visible = getVisibleFiles(files, expandedFolders);
+    setFilteredFiles(visible);
+  }, [files, expandedFolders]);
 
   const handleSelectFile = (fileId) => {
     setSelectedFiles(prev => {
@@ -99,8 +150,9 @@ function App() {
   const handleDownloadFile = (file) => {
     try {
       const basePath = import.meta.env.BASE_URL || '/';
+      const filePath = file.path || file.name;
       const link = document.createElement('a');
-      link.href = `${basePath}files/${file.name}`;
+      link.href = `${basePath}files/${filePath}`;
       link.download = file.name;
       document.body.appendChild(link);
       link.click();
@@ -128,8 +180,9 @@ function App() {
       const basePath = import.meta.env.BASE_URL || '/';
       for (const file of selectedFileList) {
         await new Promise(resolve => setTimeout(resolve, 300));
+        const filePath = file.path || file.name;
         const link = document.createElement('a');
-        link.href = `${basePath}files/${file.name}`;
+        link.href = `${basePath}files/${filePath}`;
         link.download = file.name;
         document.body.appendChild(link);
         link.click();
@@ -165,15 +218,19 @@ function App() {
         {viewMode === 'split' ? (
           <SplitView
             files={filteredFiles}
+            expandedFolders={expandedFolders}
+            onToggleFolder={handleToggleFolder}
             onDownloadFile={handleDownloadFile}
           />
         ) : (
           <FileList
             files={filteredFiles}
             selectedFiles={selectedFiles}
+            expandedFolders={expandedFolders}
             onSelectFile={handleSelectFile}
             onDownloadFile={handleDownloadFile}
             onPreviewFile={handlePreviewFile}
+            onToggleFolder={handleToggleFolder}
             viewMode={viewMode}
           />
         )}

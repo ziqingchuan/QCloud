@@ -41,10 +41,38 @@
 .split-file-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   padding: 10px 16px;
   cursor: pointer;
   transition: background-color 0.15s;
+}
+
+.split-file-item.folder {
+  font-weight: 500;
+}
+
+.split-folder-toggle {
+  background: transparent;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.split-folder-toggle:hover {
+  background-color: #DADCE0;
+}
+
+.split-folder-spacer {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 .split-file-item:hover {

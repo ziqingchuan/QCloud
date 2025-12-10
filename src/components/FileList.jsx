@@ -4,21 +4,20 @@ import '../styles/FileList.css';
 
 export default function FileList({ 
   files, 
-  selectedFiles, 
+  selectedFiles,
+  expandedFolders,
   onSelectFile, 
   onDownloadFile,
   onPreviewFile,
+  onToggleFolder,
   viewMode 
 }) {
   const [sortedFiles, setSortedFiles] = useState([]);
 
   useEffect(() => {
-    const sorted = [...files].sort((a, b) => {
-      if (a.type === 'folder' && b.type !== 'folder') return -1;
-      if (a.type !== 'folder' && b.type === 'folder') return 1;
-      return a.name.localeCompare(b.name);
-    });
-    setSortedFiles(sorted);
+    // 直接使用文件列表，不进行排序
+    // 文件列表在生成时已经按照正确的层级顺序排列
+    setSortedFiles(files);
   }, [files]);
 
   if (sortedFiles.length === 0) {
@@ -33,6 +32,7 @@ export default function FileList({
     <div className={`file-list ${viewMode}`}>
       {viewMode === 'list' && (
         <div className="file-list-header">
+          <div className="header-expand"></div>
           <div className="header-checkbox"></div>
           <div className="header-icon"></div>
           <div className="header-name">名称</div>
@@ -48,9 +48,11 @@ export default function FileList({
             key={file.id}
             file={file}
             isSelected={selectedFiles.includes(file.id)}
+            isExpanded={expandedFolders.includes(file.path)}
             onSelect={onSelectFile}
             onDownload={onDownloadFile}
             onPreview={onPreviewFile}
+            onToggleFolder={onToggleFolder}
             viewMode={viewMode}
           />
         ))}

@@ -3,10 +3,12 @@ import FileIcon from './icons/FileIcon';
 import FolderIcon from './icons/FolderIcon';
 import DownloadIcon from './icons/DownloadIcon';
 import CopyIcon from './icons/CopyIcon';
+import ChevronRightIcon from './icons/ChevronRightIcon';
+import ChevronDownIcon from './icons/ChevronDownIcon';
 import { getFileType, formatFileSize, formatDate } from '../utils/fileUtils';
 import '../styles/SplitView.css';
 
-export default function SplitView({ files, onDownloadFile }) {
+export default function SplitView({ files, expandedFolders, onToggleFolder, onDownloadFile }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
@@ -33,19 +35,20 @@ export default function SplitView({ files, onDownloadFile }) {
     
     try {
       const basePath = import.meta.env.BASE_URL || '/';
+      const filePath = selectedFile.path || selectedFile.name;
       const ext = selectedFile.name.split('.').pop().toLowerCase();
       const textExtensions = ['txt', 'md', 'html', 'css', 'js', 'json', 'xml', 'csv', 'log', 'jsx', 'ts', 'tsx', 'doc', 'docx'];
       const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp'];
       
       if (ext === 'pdf') {
-        setContent(`${basePath}files/${selectedFile.name}`);
+        setContent(`${basePath}files/${filePath}`);
       } else if (textExtensions.includes(ext)) {
-        const response = await fetch(`${basePath}files/${selectedFile.name}`);
+        const response = await fetch(`${basePath}files/${filePath}`);
         const blob = await response.blob();
         const text = await blob.text();
         setContent(text);
       } else if (imageExtensions.includes(ext)) {
-        setContent(`${basePath}files/${selectedFile.name}`);
+        setContent(`${basePath}files/${filePath}`);
       } else {
         setContent('preview-not-supported');
       }
@@ -163,13 +166,40 @@ export default function SplitView({ files, onDownloadFile }) {
           {files.map(file => {
             const fileType = getFileType(file.name);
             const isSelected = selectedFile?.id === file.id;
+            const isExpanded = expandedFolders.includes(file.path);
+            const depth = file.parentPath ? file.parentPath.split('/').length : 0;
+            
+            const handleClick = () => {
+              if (file.type === 'folder') {
+                onToggleFolder(file.path);
+              } else {
+                setSelectedFile(file);
+              }
+            };
+            
+            const handleToggle = (e) => {
+              e.stopPropagation();
+              onToggleFolder(file.path);
+            };
             
             return (
               <div
                 key={file.id}
-                className={`split-file-item ${isSelected ? 'selected' : ''}`}
-                onClick={() => setSelectedFile(file)}
+                className={`split-file-item ${isSelected ? 'selected' : ''} ${file.type === 'folder' ? 'folder' : ''}`}
+                onClick={handleClick}
+                style={{ paddingLeft: `${16 + depth * 20}px` }}
               >
+                {file.type === 'folder' && file.hasChildren ? (
+                  <button className="split-folder-toggle" onClick={handleToggle}>
+                    {isExpanded ? (
+                      <ChevronDownIcon size={14} />
+                    ) : (
+                      <ChevronRightIcon size={14} />
+                    )}
+                  </button>
+                ) : (
+                  <span className="split-folder-spacer"></span>
+                )}
                 <div className="split-file-icon">
                   {file.type === 'folder' ? (
                     <FolderIcon size={20} />
@@ -181,9 +211,11 @@ export default function SplitView({ files, onDownloadFile }) {
                   <div className="split-file-name" title={file.name}>
                     {file.name}
                   </div>
-                  <div className="split-file-meta">
-                    {formatFileSize(file.size)}
-                  </div>
+                  {file.type !== 'folder' && (
+                    <div className="split-file-meta">
+                      {formatFileSize(file.size)}
+                    </div>
+                  )}
                 </div>
               </div>
             );

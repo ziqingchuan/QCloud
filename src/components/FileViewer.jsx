@@ -26,15 +26,18 @@ export default function FileViewer({ file, onDownload, onClose }) {
       const textExtensions = ['txt', 'md', 'html', 'css', 'js', 'json', 'xml', 'csv', 'log', 'jsx', 'ts', 'tsx', 'doc', 'docx'];
       const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp'];
       
+      // 使用 file.path 而不是 file.name 来获取完整路径
+      const filePath = file.path || file.name;
+      
       if (ext === 'pdf') {
-        setContent(`${basePath}files/${file.name}`);
+        setContent(`${basePath}files/${filePath}`);
       } else if (textExtensions.includes(ext)) {
-        const response = await fetch(`${basePath}files/${file.name}`);
+        const response = await fetch(`${basePath}files/${filePath}`);
         const blob = await response.blob();
         const text = await blob.text();
         setContent(text);
       } else if (imageExtensions.includes(ext)) {
-        setContent(`${basePath}files/${file.name}`);
+        setContent(`${basePath}files/${filePath}`);
       } else {
         setContent('preview-not-supported');
       }
