@@ -1,103 +1,393 @@
 [
   {
     "id": 1,
-    "name": "提示词",
-    "path": "提示词",
+    "name": "毕业论文图表",
+    "path": "毕业论文图表",
     "type": "folder",
     "size": 0,
-    "modifiedDate": "2025-12-09T13:02:25.181Z",
+    "modifiedDate": "2025-12-16T02:09:04.222Z",
     "parentPath": "",
     "hasChildren": true
   },
   {
     "id": 2,
-    "name": "智能体提示词（工作流调用）.md",
-    "path": "提示词/智能体提示词（工作流调用）.md",
+    "name": "包依赖结构.png",
+    "path": "毕业论文图表/包依赖结构.png",
     "type": "file",
-    "size": 5425,
-    "modifiedDate": "2025-12-08T06:41:24.208Z",
-    "parentPath": "提示词"
+    "size": 270013,
+    "modifiedDate": "2025-11-28T07:44:11.821Z",
+    "parentPath": "毕业论文图表"
   },
   {
     "id": 3,
-    "name": "智能体提示词（简易）.md",
-    "path": "提示词/智能体提示词（简易）.md",
+    "name": "并行处理策略.png",
+    "path": "毕业论文图表/并行处理策略.png",
     "type": "file",
-    "size": 2852,
-    "modifiedDate": "2025-12-08T05:28:34.484Z",
-    "parentPath": "提示词"
+    "size": 154846,
+    "modifiedDate": "2025-11-28T07:37:35.733Z",
+    "parentPath": "毕业论文图表"
   },
   {
     "id": 4,
-    "name": "智能体提示词（知识库调用）.md",
-    "path": "提示词/智能体提示词（知识库调用）.md",
+    "name": "插件主工作流程.png",
+    "path": "毕业论文图表/插件主工作流程.png",
     "type": "file",
-    "size": 4242,
-    "modifiedDate": "2025-12-08T05:28:31.737Z",
-    "parentPath": "提示词"
+    "size": 169646,
+    "modifiedDate": "2025-11-28T07:23:50.502Z",
+    "parentPath": "毕业论文图表"
   },
   {
     "id": 5,
-    "name": "图片资源",
-    "path": "图片资源",
+    "name": "错误处理流程.png",
+    "path": "毕业论文图表/错误处理流程.png",
+    "type": "file",
+    "size": 145618,
+    "modifiedDate": "2025-11-28T07:28:43.646Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 6,
+    "name": "调试工具架构.png",
+    "path": "毕业论文图表/调试工具架构.png",
+    "type": "file",
+    "size": 153325,
+    "modifiedDate": "2025-11-28T07:42:46.366Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 7,
+    "name": "发布流程.png",
+    "path": "毕业论文图表/发布流程.png",
+    "type": "file",
+    "size": 141979,
+    "modifiedDate": "2025-11-28T07:41:31.615Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 8,
+    "name": "构建流程.png",
+    "path": "毕业论文图表/构建流程.png",
+    "type": "file",
+    "size": 125764,
+    "modifiedDate": "2025-11-28T07:41:02.064Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 9,
+    "name": "缓存管理流程.png",
+    "path": "毕业论文图表/缓存管理流程.png",
+    "type": "file",
+    "size": 136798,
+    "modifiedDate": "2025-11-28T07:31:14.008Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 10,
+    "name": "缓存架构.png",
+    "path": "毕业论文图表/缓存架构.png",
+    "type": "file",
+    "size": 197455,
+    "modifiedDate": "2025-11-28T07:38:05.609Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 11,
+    "name": "技术栈结构.png",
+    "path": "毕业论文图表/技术栈结构.png",
+    "type": "file",
+    "size": 179729,
+    "modifiedDate": "2025-11-28T07:43:14.818Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 12,
+    "name": "节点转换流程.png",
+    "path": "毕业论文图表/节点转换流程.png",
+    "type": "file",
+    "size": 147238,
+    "modifiedDate": "2025-11-28T07:25:20.009Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 13,
+    "name": "节点转换模块类图.png",
+    "path": "毕业论文图表/节点转换模块类图.png",
+    "type": "file",
+    "size": 273619,
+    "modifiedDate": "2025-11-28T07:35:10.621Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 14,
+    "name": "沙箱隔离.png",
+    "path": "毕业论文图表/沙箱隔离.png",
+    "type": "file",
+    "size": 203789,
+    "modifiedDate": "2025-11-28T07:40:10.145Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 15,
+    "name": "数据存储结构.png",
+    "path": "毕业论文图表/数据存储结构.png",
+    "type": "file",
+    "size": 150804,
+    "modifiedDate": "2025-11-28T07:45:54.398Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 16,
+    "name": "完整转换流程.png",
+    "path": "毕业论文图表/完整转换流程.png",
+    "type": "file",
+    "size": 171050,
+    "modifiedDate": "2025-11-28T07:33:59.193Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 17,
+    "name": "网络访问控制.png",
+    "path": "毕业论文图表/网络访问控制.png",
+    "type": "file",
+    "size": 194207,
+    "modifiedDate": "2025-11-28T07:40:38.528Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 18,
+    "name": "项目文件结构.png",
+    "path": "毕业论文图表/项目文件结构.png",
+    "type": "file",
+    "size": 143556,
+    "modifiedDate": "2025-11-28T07:44:52.407Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 19,
+    "name": "消息通信机制.png",
+    "path": "毕业论文图表/消息通信机制.png",
+    "type": "file",
+    "size": 156900,
+    "modifiedDate": "2025-11-28T07:28:05.942Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 20,
+    "name": "消息通信架构.png",
+    "path": "毕业论文图表/消息通信架构.png",
+    "type": "file",
+    "size": 213408,
+    "modifiedDate": "2025-11-28T07:34:31.197Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 21,
+    "name": "性能监控.png",
+    "path": "毕业论文图表/性能监控.png",
+    "type": "file",
+    "size": 214253,
+    "modifiedDate": "2025-11-28T07:41:58.865Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 22,
+    "name": "性能监控捕捉.png",
+    "path": "毕业论文图表/性能监控捕捉.png",
+    "type": "file",
+    "size": 127089,
+    "modifiedDate": "2025-11-28T07:29:13.310Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 23,
+    "name": "用户设置管理流程.png",
+    "path": "毕业论文图表/用户设置管理流程.png",
+    "type": "file",
+    "size": 131144,
+    "modifiedDate": "2025-11-28T07:31:51.374Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 24,
+    "name": "运行时环境.png",
+    "path": "毕业论文图表/运行时环境.png",
+    "type": "file",
+    "size": 175710,
+    "modifiedDate": "2025-11-28T07:45:27.959Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 25,
+    "name": "整体系统架构.png",
+    "path": "毕业论文图表/整体系统架构.png",
+    "type": "file",
+    "size": 193535,
+    "modifiedDate": "2025-11-28T07:32:32.828Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 26,
+    "name": "AI优化流程.png",
+    "path": "毕业论文图表/AI优化流程.png",
+    "type": "file",
+    "size": 128830,
+    "modifiedDate": "2025-11-28T07:27:16.998Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 27,
+    "name": "AI优化模块类图.png",
+    "path": "毕业论文图表/AI优化模块类图.png",
+    "type": "file",
+    "size": 298935,
+    "modifiedDate": "2025-11-28T07:36:18.396Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 28,
+    "name": "html生成流程.png",
+    "path": "毕业论文图表/html生成流程.png",
+    "type": "file",
+    "size": 206712,
+    "modifiedDate": "2025-11-28T07:26:30.535Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 29,
+    "name": "HTML生成模块类图.png",
+    "path": "毕业论文图表/HTML生成模块类图.png",
+    "type": "file",
+    "size": 252892,
+    "modifiedDate": "2025-11-28T07:35:44.300Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 30,
+    "name": "monoRepo项目结构.png",
+    "path": "毕业论文图表/monoRepo项目结构.png",
+    "type": "file",
+    "size": 167568,
+    "modifiedDate": "2025-11-28T07:33:05.556Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 31,
+    "name": "UI组件类图.png",
+    "path": "毕业论文图表/UI组件类图.png",
+    "type": "file",
+    "size": 223562,
+    "modifiedDate": "2025-11-28T07:37:11.564Z",
+    "parentPath": "毕业论文图表"
+  },
+  {
+    "id": 32,
+    "name": "智能体搭建培训课材料",
+    "path": "智能体搭建培训课材料",
     "type": "folder",
     "size": 0,
-    "modifiedDate": "2025-12-09T13:20:42.980Z",
+    "modifiedDate": "2025-12-16T02:09:28.781Z",
     "parentPath": "",
     "hasChildren": true
   },
   {
-    "id": 6,
+    "id": 33,
+    "name": "提示词",
+    "path": "智能体搭建培训课材料/提示词",
+    "type": "folder",
+    "size": 0,
+    "modifiedDate": "2025-12-09T13:02:25.181Z",
+    "parentPath": "智能体搭建培训课材料",
+    "hasChildren": true
+  },
+  {
+    "id": 34,
+    "name": "智能体提示词（工作流调用）.md",
+    "path": "智能体搭建培训课材料/提示词/智能体提示词（工作流调用）.md",
+    "type": "file",
+    "size": 5425,
+    "modifiedDate": "2025-12-08T06:41:24.208Z",
+    "parentPath": "智能体搭建培训课材料/提示词"
+  },
+  {
+    "id": 35,
+    "name": "智能体提示词（简易）.md",
+    "path": "智能体搭建培训课材料/提示词/智能体提示词（简易）.md",
+    "type": "file",
+    "size": 2852,
+    "modifiedDate": "2025-12-08T05:28:34.484Z",
+    "parentPath": "智能体搭建培训课材料/提示词"
+  },
+  {
+    "id": 36,
+    "name": "智能体提示词（知识库调用）.md",
+    "path": "智能体搭建培训课材料/提示词/智能体提示词（知识库调用）.md",
+    "type": "file",
+    "size": 4242,
+    "modifiedDate": "2025-12-08T05:28:31.737Z",
+    "parentPath": "智能体搭建培训课材料/提示词"
+  },
+  {
+    "id": 37,
+    "name": "图片资源",
+    "path": "智能体搭建培训课材料/图片资源",
+    "type": "folder",
+    "size": 0,
+    "modifiedDate": "2025-12-09T13:20:42.980Z",
+    "parentPath": "智能体搭建培训课材料",
+    "hasChildren": true
+  },
+  {
+    "id": 38,
     "name": "废弃纸箱.png",
-    "path": "图片资源/废弃纸箱.png",
+    "path": "智能体搭建培训课材料/图片资源/废弃纸箱.png",
     "type": "file",
     "size": 50920,
     "modifiedDate": "2025-12-09T13:19:08.533Z",
-    "parentPath": "图片资源"
+    "parentPath": "智能体搭建培训课材料/图片资源"
   },
   {
-    "id": 7,
+    "id": 39,
     "name": "工作流截图.png",
-    "path": "图片资源/工作流截图.png",
+    "path": "智能体搭建培训课材料/图片资源/工作流截图.png",
     "type": "file",
     "size": 46851,
     "modifiedDate": "2025-12-09T13:19:31.950Z",
-    "parentPath": "图片资源"
+    "parentPath": "智能体搭建培训课材料/图片资源"
   },
   {
-    "id": 8,
+    "id": 40,
     "name": "智能体封面.png",
-    "path": "图片资源/智能体封面.png",
+    "path": "智能体搭建培训课材料/图片资源/智能体封面.png",
     "type": "file",
     "size": 85988,
     "modifiedDate": "2025-12-09T13:19:46.930Z",
-    "parentPath": "图片资源"
+    "parentPath": "智能体搭建培训课材料/图片资源"
   },
   {
-    "id": 9,
+    "id": 41,
     "name": "豆包提问模板.md",
-    "path": "豆包提问模板.md",
+    "path": "智能体搭建培训课材料/豆包提问模板.md",
     "type": "file",
     "size": 387,
     "modifiedDate": "2025-12-08T05:10:50.490Z",
-    "parentPath": ""
+    "parentPath": "智能体搭建培训课材料"
   },
   {
-    "id": 10,
+    "id": 42,
     "name": "工作流搭建流程.pdf",
-    "path": "工作流搭建流程.pdf",
+    "path": "智能体搭建培训课材料/工作流搭建流程.pdf",
     "type": "file",
     "size": 864380,
     "modifiedDate": "2025-12-08T07:00:02.850Z",
-    "parentPath": ""
+    "parentPath": "智能体搭建培训课材料"
   },
   {
-    "id": 11,
+    "id": 43,
     "name": "垃圾分类知识练习题.md",
-    "path": "垃圾分类知识练习题.md",
+    "path": "智能体搭建培训课材料/垃圾分类知识练习题.md",
     "type": "file",
     "size": 31133,
     "modifiedDate": "2025-12-08T05:45:35.309Z",
-    "parentPath": ""
+    "parentPath": "智能体搭建培训课材料"
   }
 ]
