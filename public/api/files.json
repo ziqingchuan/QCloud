@@ -389,5 +389,51 @@
     "size": 31133,
     "modifiedDate": "2025-12-08T05:45:35.309Z",
     "parentPath": "智能体搭建培训课材料"
+  },
+  {
+    "id": 44,
+    "name": "React学习网站数据库备份",
+    "path": "React学习网站数据库备份",
+    "type": "folder",
+    "size": 0,
+    "modifiedDate": "2025-12-23T14:38:52.838Z",
+    "parentPath": "",
+    "hasChildren": true
+  },
+  {
+    "id": 45,
+    "name": "articles.json",
+    "path": "React学习网站数据库备份/articles.json",
+    "type": "file",
+    "size": 680281,
+    "modifiedDate": "2025-12-23T14:35:57.845Z",
+    "parentPath": "React学习网站数据库备份"
+  },
+  {
+    "id": 46,
+    "name": "articles.sql",
+    "path": "React学习网站数据库备份/articles.sql",
+    "type": "file",
+    "size": 659678,
+    "modifiedDate": "2025-12-23T14:37:13.132Z",
+    "parentPath": "React学习网站数据库备份"
+  },
+  {
+    "id": 47,
+    "name": "directories.json",
+    "path": "React学习网站数据库备份/directories.json",
+    "type": "file",
+    "size": 7239,
+    "modifiedDate": "2025-12-23T14:37:23.773Z",
+    "parentPath": "React学习网站数据库备份"
+  },
+  {
+    "id": 48,
+    "name": "directories.sql",
+    "path": "React学习网站数据库备份/directories.sql",
+    "type": "file",
+    "size": 5715,
+    "modifiedDate": "2025-12-23T14:37:21.677Z",
+    "parentPath": "React学习网站数据库备份"
   }
 ]
